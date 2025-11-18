@@ -328,6 +328,138 @@ export async function postDisposalToGL(
   }
 }
 
+// Post Asset Revaluation to GL
+export async function postRevaluationToGL(
+  revaluationId: string,
+  userId: string
+): Promise<{
+  success: boolean;
+  journalEntry: JournalEntry;
+  revaluation: any;
+  message: string;
+}> {
+  const transaction = await sequelize.transaction();
+
+  try {
+    // Import AssetRevaluation model
+    const { AssetRevaluation } = await import('../db/models');
+
+    // Fetch revaluation with asset
+    const revaluation = await AssetRevaluation.findByPk(revaluationId, {
+      include: [
+        {
+          model: FixedAsset,
+          as: 'asset',
+          include: [
+            {
+              model: AssetCategory,
+              as: 'category',
+            },
+          ],
+        },
+      ],
+      transaction,
+    });
+
+    if (!revaluation) {
+      throw new Error('Revaluation not found');
+    }
+
+    if (revaluation.isPosted) {
+      throw new Error('Revaluation is already posted');
+    }
+
+    const asset = revaluation.get('asset') as FixedAsset;
+
+    // Create JE lines
+    const jeLines: any[] = [];
+    const revaluationAmount = Number(revaluation.revaluationGainLoss);
+
+    if (revaluationAmount > 0) {
+      // Revaluation gain
+      // DR Asset, CR Revaluation Reserve
+      jeLines.push({
+        accountId: asset.assetAccountId,
+        debitAmount: revaluationAmount,
+        creditAmount: 0,
+        description: `Revaluation gain - ${asset.assetName}`,
+      });
+
+      const reserveAccountId = revaluation.revaluationReserveAccountId || asset.assetAccountId;
+      jeLines.push({
+        accountId: reserveAccountId,
+        debitAmount: 0,
+        creditAmount: revaluationAmount,
+        description: `Revaluation reserve - ${asset.assetName}`,
+      });
+    } else if (revaluationAmount < 0) {
+      // Revaluation loss
+      // DR Revaluation Loss/Expense, CR Asset
+      const expenseAccountId = asset.depreciationExpenseAccountId;
+      jeLines.push({
+        accountId: expenseAccountId,
+        debitAmount: Math.abs(revaluationAmount),
+        creditAmount: 0,
+        description: `Revaluation loss - ${asset.assetName}`,
+      });
+
+      jeLines.push({
+        accountId: asset.assetAccountId,
+        debitAmount: 0,
+        creditAmount: Math.abs(revaluationAmount),
+        description: `Asset revaluation - ${asset.assetName}`,
+      });
+    }
+
+    // Create Journal Entry
+    const je = await JournalEntry.create({
+      companyId: asset.companyId,
+      documentType: 'system',
+      transactionDate: revaluation.revaluationDate,
+      description: `Revaluation of ${asset.assetName}`,
+      currencyCode: asset.currencyCode,
+      exchangeRate: Number(asset.exchangeRate),
+      sourceModule: 'fixed_assets',
+      sourceDocumentType: 'revaluation',
+      sourceDocumentId: revaluation.id,
+      requiresApproval: false,
+      status: 'draft',
+      createdBy: userId,
+      updatedBy: userId,
+    }, { transaction });
+
+    // Post the JE to GL
+    await postJournalEntry(je.id, userId);
+
+    // Update revaluation
+    await revaluation.update({
+      isPosted: true,
+      postedAt: new Date(),
+      journalEntryId: je.id,
+    }, { transaction });
+
+    // Update asset with new book value
+    await asset.update({
+      bookValue: Number(revaluation.revaluedAmount),
+      totalCost: Number(revaluation.revaluedAmount) + Number(asset.accumulatedDepreciation),
+      remainingValue: Number(revaluation.revaluedAmount) - Number(asset.salvageValue),
+    }, { transaction });
+
+    await transaction.commit();
+
+    return {
+      success: true,
+      journalEntry: je,
+      revaluation,
+      message: `Successfully posted revaluation of ${asset.assetName} to GL`,
+    };
+
+  } catch (error) {
+    await transaction.rollback();
+    throw error;
+  }
+}
+
 // Reverse Posted Depreciation
 export async function reverseDepreciation(
   depreciationId: string,
