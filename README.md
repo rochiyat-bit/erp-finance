@@ -1,6 +1,6 @@
-# ERP Finance System - Phases 1 & 2
+# ERP Finance System - Phases 1, 2 & 3
 
-A production-ready ERP Finance System built with Next.js 14, TypeScript, PostgreSQL, and NextAuth.js. This system provides complete financial management capabilities including core infrastructure and general ledger functionality.
+A production-ready ERP Finance System built with Next.js 14, TypeScript, PostgreSQL, and NextAuth.js. This system provides complete financial management capabilities including core infrastructure, general ledger, and accounts payable modules.
 
 ## Features
 
@@ -15,7 +15,7 @@ A production-ready ERP Finance System built with Next.js 14, TypeScript, Postgre
 - **Database**: PostgreSQL with Sequelize ORM
 - **UI Components**: Modern UI with shadcn/ui and Tailwind CSS
 
-### Phase 2 - General Ledger Module ✅ (Current)
+### Phase 2 - General Ledger Module ✅
 
 - **Chart of Accounts**: Hierarchical account structure with unlimited levels
 - **Journal Entries**: Create, edit, approve, and post journal entries
@@ -25,6 +25,21 @@ A production-ready ERP Finance System built with Next.js 14, TypeScript, Postgre
 - **Approval Workflow**: Optional approval process for journal entries
 - **Audit Trail**: Complete audit logging of all GL transactions
 - **Fiscal Period Controls**: Prevent posting to closed periods
+
+### Phase 3 - Accounts Payable Module ✅ (Current)
+
+- **Vendor Management**: Complete vendor profiles with contact information, banking details, and payment terms
+- **Vendor Ledger**: Track all transactions per vendor with running balances
+- **Bill Management**: Create, approve, and post vendor bills/invoices
+- **Bill Line Items**: Multi-line bills with expense account allocation, quantities, and pricing
+- **Payment Processing**: Record and track vendor payments with multiple payment methods
+- **Payment Allocation**: Allocate payments to specific bills with early payment discounts
+- **AP Posting Engine**: Automatic journal entry creation for bills and payments
+- **GL Integration**: Seamless integration with general ledger for complete financial tracking
+- **Multi-Currency Support**: Handle vendors and transactions in different currencies
+- **Approval Workflows**: Optional approval process for bills and payments
+- **AP Dashboard**: Real-time statistics and quick actions for accounts payable
+- **Vendor Balances**: Track current payable balances per vendor
 
 ## Tech Stack
 

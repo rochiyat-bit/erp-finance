@@ -59,8 +59,39 @@ export const PERMISSIONS = {
   // General Ledger - Full Access
   'gl.*': 'Full access to General Ledger',
 
-  // Future modules (placeholder)
+  // Accounts Payable - Vendors
+  'ap.vendors.view': 'View vendors',
+  'ap.vendors.create': 'Create vendors',
+  'ap.vendors.edit': 'Edit vendors',
+  'ap.vendors.delete': 'Delete vendors',
+  'ap.vendors.block': 'Block/unblock vendors',
+
+  // Accounts Payable - Bills
+  'ap.bills.view': 'View bills',
+  'ap.bills.create': 'Create bills',
+  'ap.bills.edit': 'Edit bills',
+  'ap.bills.delete': 'Delete bills',
+  'ap.bills.approve': 'Approve bills',
+  'ap.bills.post': 'Post bills to GL',
+  'ap.bills.cancel': 'Cancel bills',
+
+  // Accounts Payable - Payments
+  'ap.payments.view': 'View payments',
+  'ap.payments.create': 'Create payments',
+  'ap.payments.edit': 'Edit payments',
+  'ap.payments.delete': 'Delete payments',
+  'ap.payments.approve': 'Approve payments',
+  'ap.payments.post': 'Post payments to GL',
+  'ap.payments.void': 'Void payments',
+
+  // Accounts Payable - Reports
+  'ap.reports.view': 'View AP reports',
+  'ap.reports.export': 'Export AP reports',
+
+  // Accounts Payable - Full Access
   'ap.*': 'Full access to Accounts Payable',
+
+  // Accounts Receivable (Future module - placeholder)
   'ar.*': 'Full access to Accounts Receivable',
 } as const;
 
@@ -93,11 +124,26 @@ export const SYSTEM_ROLES = {
     'currencies.view',
     'fiscal_years.view',
     'gl.*',
-    'ap.view',
-    'ar.view',
+    'ap.*',
+    'ar.*',
   ],
-  staff: ['company.view', 'gl.view', 'ap.view', 'ar.view'],
-  viewer: ['company.view', 'gl.view', 'ap.view', 'ar.view', 'audit_logs.view'],
+  staff: [
+    'company.view',
+    'gl.coa.view',
+    'gl.je.view',
+    'ap.vendors.view',
+    'ap.bills.view',
+    'ap.payments.view',
+  ],
+  viewer: [
+    'company.view',
+    'gl.coa.view',
+    'gl.je.view',
+    'ap.vendors.view',
+    'ap.bills.view',
+    'ap.payments.view',
+    'audit_logs.view',
+  ],
 };
 
 // Permission checking utilities
