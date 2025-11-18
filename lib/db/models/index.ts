@@ -9,6 +9,12 @@ import Currency from './Currency';
 import ExchangeRate from './ExchangeRate';
 import FiscalYear from './FiscalYear';
 import FiscalPeriod from './FiscalPeriod';
+import ChartOfAccount from './ChartOfAccount';
+import JournalEntry from './JournalEntry';
+import JournalEntryLine from './JournalEntryLine';
+import GeneralLedger from './GeneralLedger';
+import AccountBalance from './AccountBalance';
+import JournalEntryTemplate from './JournalEntryTemplate';
 import sequelize from '../sequelize';
 
 // Export all models
@@ -23,6 +29,12 @@ export {
   ExchangeRate,
   FiscalYear,
   FiscalPeriod,
+  ChartOfAccount,
+  JournalEntry,
+  JournalEntryLine,
+  GeneralLedger,
+  AccountBalance,
+  JournalEntryTemplate,
   sequelize,
 };
 
@@ -55,6 +67,12 @@ export default {
   ExchangeRate,
   FiscalYear,
   FiscalPeriod,
+  ChartOfAccount,
+  JournalEntry,
+  JournalEntryLine,
+  GeneralLedger,
+  AccountBalance,
+  JournalEntryTemplate,
   sequelize,
   initializeDatabase,
 };

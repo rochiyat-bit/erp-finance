@@ -37,8 +37,29 @@ export const PERMISSIONS = {
   'fiscal_years.create': 'Create fiscal years',
   'fiscal_years.close': 'Close fiscal years',
 
-  // Future modules (placeholder)
+  // General Ledger - Chart of Accounts
+  'gl.coa.view': 'View chart of accounts',
+  'gl.coa.create': 'Create accounts',
+  'gl.coa.edit': 'Edit accounts',
+  'gl.coa.delete': 'Delete accounts',
+
+  // General Ledger - Journal Entries
+  'gl.je.view': 'View journal entries',
+  'gl.je.create': 'Create journal entries',
+  'gl.je.edit': 'Edit journal entries',
+  'gl.je.delete': 'Delete journal entries',
+  'gl.je.approve': 'Approve journal entries',
+  'gl.je.post': 'Post journal entries',
+  'gl.je.reverse': 'Reverse journal entries',
+
+  // General Ledger - Reports
+  'gl.reports.view': 'View GL reports',
+  'gl.reports.export': 'Export GL reports',
+
+  // General Ledger - Full Access
   'gl.*': 'Full access to General Ledger',
+
+  // Future modules (placeholder)
   'ap.*': 'Full access to Accounts Payable',
   'ar.*': 'Full access to Accounts Receivable',
 } as const;

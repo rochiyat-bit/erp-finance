@@ -1,10 +1,10 @@
-# ERP Finance System - Phase 1 (Core Infrastructure)
+# ERP Finance System - Phases 1 & 2
 
-A production-ready ERP Finance System built with Next.js 14, TypeScript, PostgreSQL, and NextAuth.js. This is Phase 1, which establishes the core infrastructure for a multi-tenant enterprise financial management system.
+A production-ready ERP Finance System built with Next.js 14, TypeScript, PostgreSQL, and NextAuth.js. This system provides complete financial management capabilities including core infrastructure and general ledger functionality.
 
 ## Features
 
-### Phase 1 - Core Infrastructure (Current)
+### Phase 1 - Core Infrastructure ✅
 
 - **Multi-tenant Architecture**: Isolated data per company with complete separation
 - **Authentication & Authorization**: Secure authentication with NextAuth.js and JWT
@@ -14,6 +14,17 @@ A production-ready ERP Finance System built with Next.js 14, TypeScript, Postgre
 - **Security**: Rate limiting, input validation, password hashing, and audit logging
 - **Database**: PostgreSQL with Sequelize ORM
 - **UI Components**: Modern UI with shadcn/ui and Tailwind CSS
+
+### Phase 2 - General Ledger Module ✅ (Current)
+
+- **Chart of Accounts**: Hierarchical account structure with unlimited levels
+- **Journal Entries**: Create, edit, approve, and post journal entries
+- **Posting Engine**: Automated posting to general ledger with transaction integrity
+- **Account Balances**: Real-time balance tracking and calculation
+- **Multi-Currency Support**: Journal entries in multiple currencies with exchange rates
+- **Approval Workflow**: Optional approval process for journal entries
+- **Audit Trail**: Complete audit logging of all GL transactions
+- **Fiscal Period Controls**: Prevent posting to closed periods
 
 ## Tech Stack
 
