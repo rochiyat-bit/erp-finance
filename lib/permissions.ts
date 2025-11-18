@@ -91,7 +91,46 @@ export const PERMISSIONS = {
   // Accounts Payable - Full Access
   'ap.*': 'Full access to Accounts Payable',
 
-  // Accounts Receivable (Future module - placeholder)
+  // Accounts Receivable - Customers
+  'ar.customers.view': 'View customers',
+  'ar.customers.create': 'Create customers',
+  'ar.customers.edit': 'Edit customers',
+  'ar.customers.delete': 'Delete customers',
+  'ar.customers.block': 'Block/unblock customers',
+
+  // Accounts Receivable - Sales Orders
+  'ar.sales_orders.view': 'View sales orders',
+  'ar.sales_orders.create': 'Create sales orders',
+  'ar.sales_orders.edit': 'Edit sales orders',
+  'ar.sales_orders.delete': 'Delete sales orders',
+  'ar.sales_orders.approve': 'Approve sales orders',
+  'ar.sales_orders.confirm': 'Confirm sales orders',
+  'ar.sales_orders.cancel': 'Cancel sales orders',
+
+  // Accounts Receivable - Invoices
+  'ar.invoices.view': 'View invoices',
+  'ar.invoices.create': 'Create invoices',
+  'ar.invoices.edit': 'Edit invoices',
+  'ar.invoices.delete': 'Delete invoices',
+  'ar.invoices.approve': 'Approve invoices',
+  'ar.invoices.post': 'Post invoices to GL',
+  'ar.invoices.void': 'Void invoices',
+  'ar.invoices.send': 'Send invoices to customers',
+
+  // Accounts Receivable - Payments
+  'ar.payments.view': 'View customer payments',
+  'ar.payments.create': 'Create customer payments',
+  'ar.payments.edit': 'Edit customer payments',
+  'ar.payments.delete': 'Delete customer payments',
+  'ar.payments.approve': 'Approve customer payments',
+  'ar.payments.post': 'Post customer payments to GL',
+  'ar.payments.void': 'Void customer payments',
+
+  // Accounts Receivable - Reports
+  'ar.reports.view': 'View AR reports',
+  'ar.reports.export': 'Export AR reports',
+
+  // Accounts Receivable - Full Access
   'ar.*': 'Full access to Accounts Receivable',
 } as const;
 
@@ -134,6 +173,10 @@ export const SYSTEM_ROLES = {
     'ap.vendors.view',
     'ap.bills.view',
     'ap.payments.view',
+    'ar.customers.view',
+    'ar.sales_orders.view',
+    'ar.invoices.view',
+    'ar.payments.view',
   ],
   viewer: [
     'company.view',
@@ -142,6 +185,10 @@ export const SYSTEM_ROLES = {
     'ap.vendors.view',
     'ap.bills.view',
     'ap.payments.view',
+    'ar.customers.view',
+    'ar.sales_orders.view',
+    'ar.invoices.view',
+    'ar.payments.view',
     'audit_logs.view',
   ],
 };

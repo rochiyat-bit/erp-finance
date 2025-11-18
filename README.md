@@ -1,6 +1,6 @@
-# ERP Finance System - Phases 1, 2 & 3
+# ERP Finance System - Phases 1-4
 
-A production-ready ERP Finance System built with Next.js 14, TypeScript, PostgreSQL, and NextAuth.js. This system provides complete financial management capabilities including core infrastructure, general ledger, and accounts payable modules.
+A production-ready ERP Finance System built with Next.js 14, TypeScript, PostgreSQL, and NextAuth.js. This system provides complete financial management capabilities including core infrastructure, general ledger, accounts payable, and accounts receivable modules.
 
 ## Features
 
@@ -26,7 +26,7 @@ A production-ready ERP Finance System built with Next.js 14, TypeScript, Postgre
 - **Audit Trail**: Complete audit logging of all GL transactions
 - **Fiscal Period Controls**: Prevent posting to closed periods
 
-### Phase 3 - Accounts Payable Module ✅ (Current)
+### Phase 3 - Accounts Payable Module ✅
 
 - **Vendor Management**: Complete vendor profiles with contact information, banking details, and payment terms
 - **Vendor Ledger**: Track all transactions per vendor with running balances
@@ -40,6 +40,25 @@ A production-ready ERP Finance System built with Next.js 14, TypeScript, Postgre
 - **Approval Workflows**: Optional approval process for bills and payments
 - **AP Dashboard**: Real-time statistics and quick actions for accounts payable
 - **Vendor Balances**: Track current payable balances per vendor
+
+### Phase 4 - Accounts Receivable Module ✅ (Current)
+
+- **Customer Management**: Complete customer profiles with contact information, credit limits, and payment terms
+- **Customer Ledger**: Track all transactions per customer with running balances and aging
+- **Sales Order Management**: Create, approve, confirm, and track sales orders
+- **Sales Order Workflow**: Approval and confirmation process before delivery and invoicing
+- **Invoice Management**: Create, approve, post, and send customer invoices
+- **Invoice Line Items**: Multi-line invoices with revenue account allocation and pricing
+- **Customer Payments**: Record and track customer payments with multiple payment methods
+- **Payment Allocation**: Allocate payments to specific invoices with early payment discounts
+- **AR Posting Engine**: Automatic journal entry creation for invoices and payments
+- **GL Integration**: Seamless integration with general ledger for complete revenue tracking
+- **Multi-Currency Support**: Handle customers and transactions in different currencies
+- **Credit Limit Tracking**: Monitor customer credit limits and outstanding balances
+- **Approval Workflows**: Optional approval process for invoices and payments
+- **AR Dashboard**: Real-time statistics showing receivables, aging, and collection metrics
+- **Customer Balances**: Track current receivable balances and aging per customer
+- **Payment Status Tracking**: Track invoice payment status (unpaid, partial, paid, overdue)
 
 ## Tech Stack
 
@@ -238,10 +257,9 @@ Make sure to set all environment variables in your production environment:
 
 ## Future Phases
 
-- **Phase 2**: General Ledger Module
-- **Phase 3**: Accounts Payable
-- **Phase 4**: Accounts Receivable
 - **Phase 5**: Reporting & Analytics
+- **Phase 6**: Inventory Management
+- **Phase 7**: Fixed Assets
 
 ## License
 

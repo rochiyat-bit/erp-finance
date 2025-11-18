@@ -20,6 +20,13 @@ import Bill from './Bill';
 import BillLine from './BillLine';
 import BillPayment from './BillPayment';
 import PaymentAllocation from './PaymentAllocation';
+import Customer from './Customer';
+import SalesOrder from './SalesOrder';
+import SalesOrderLine from './SalesOrderLine';
+import Invoice from './Invoice';
+import InvoiceLine from './InvoiceLine';
+import CustomerPayment from './CustomerPayment';
+import CustomerPaymentAllocation from './CustomerPaymentAllocation';
 import sequelize from '../sequelize';
 
 // Export all models
@@ -45,6 +52,13 @@ export {
   BillLine,
   BillPayment,
   PaymentAllocation,
+  Customer,
+  SalesOrder,
+  SalesOrderLine,
+  Invoice,
+  InvoiceLine,
+  CustomerPayment,
+  CustomerPaymentAllocation,
   sequelize,
 };
 
@@ -75,6 +89,39 @@ BillPayment.belongsTo(ChartOfAccount, { foreignKey: 'apAccountId', as: 'apAccoun
 
 Vendor.belongsTo(ChartOfAccount, { foreignKey: 'apAccountId', as: 'apAccount' });
 Vendor.belongsTo(ChartOfAccount, { foreignKey: 'expenseAccountId', as: 'expenseAccount' });
+
+// AR Module Relationships
+Customer.hasMany(SalesOrder, { foreignKey: 'customerId', as: 'salesOrders' });
+SalesOrder.belongsTo(Customer, { foreignKey: 'customerId', as: 'customer' });
+
+Customer.hasMany(Invoice, { foreignKey: 'customerId', as: 'invoices' });
+Invoice.belongsTo(Customer, { foreignKey: 'customerId', as: 'customer' });
+
+Customer.hasMany(CustomerPayment, { foreignKey: 'customerId', as: 'payments' });
+CustomerPayment.belongsTo(Customer, { foreignKey: 'customerId', as: 'customer' });
+
+SalesOrder.hasMany(SalesOrderLine, { foreignKey: 'salesOrderId', as: 'lines' });
+SalesOrderLine.belongsTo(SalesOrder, { foreignKey: 'salesOrderId', as: 'salesOrder' });
+
+SalesOrder.hasMany(Invoice, { foreignKey: 'salesOrderId', as: 'invoices' });
+Invoice.belongsTo(SalesOrder, { foreignKey: 'salesOrderId', as: 'salesOrder' });
+
+Invoice.hasMany(InvoiceLine, { foreignKey: 'invoiceId', as: 'lines' });
+InvoiceLine.belongsTo(Invoice, { foreignKey: 'invoiceId', as: 'invoice' });
+
+Invoice.hasMany(CustomerPaymentAllocation, { foreignKey: 'invoiceId', as: 'allocations' });
+CustomerPaymentAllocation.belongsTo(Invoice, { foreignKey: 'invoiceId', as: 'invoice' });
+
+CustomerPayment.hasMany(CustomerPaymentAllocation, { foreignKey: 'customerPaymentId', as: 'allocations' });
+CustomerPaymentAllocation.belongsTo(CustomerPayment, { foreignKey: 'customerPaymentId', as: 'payment' });
+
+Invoice.belongsTo(JournalEntry, { foreignKey: 'journalEntryId', as: 'journalEntry' });
+CustomerPayment.belongsTo(JournalEntry, { foreignKey: 'journalEntryId', as: 'journalEntry' });
+
+Customer.belongsTo(ChartOfAccount, { foreignKey: 'defaultARAccountId', as: 'arAccount' });
+Customer.belongsTo(ChartOfAccount, { foreignKey: 'defaultRevenueAccountId', as: 'revenueAccount' });
+InvoiceLine.belongsTo(ChartOfAccount, { foreignKey: 'revenueAccountId', as: 'revenueAccount' });
+CustomerPayment.belongsTo(ChartOfAccount, { foreignKey: 'bankAccountId', as: 'bankAccount' });
 
 // Initialize all models and associations
 export async function initializeDatabase() {
@@ -116,6 +163,13 @@ export default {
   BillLine,
   BillPayment,
   PaymentAllocation,
+  Customer,
+  SalesOrder,
+  SalesOrderLine,
+  Invoice,
+  InvoiceLine,
+  CustomerPayment,
+  CustomerPaymentAllocation,
   sequelize,
   initializeDatabase,
 };
